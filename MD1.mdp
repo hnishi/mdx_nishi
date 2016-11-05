@@ -1,0 +1,45 @@
+title               =  mdx
+define              =  ;-DPOSRESDNA
+
+integrator          =  md 
+tinit               =  0.0
+dt                  =  0.002
+nsteps              =  50000000;100ns
+	
+nstcomm             =  5
+nstxout             =  1000        ; 2ps
+nstvout             =  0
+nstfout             =  0
+nstlist             =  10
+ns_type             =  grid
+
+pbc		    =  xyz
+
+; PME
+coulombtype         =  PME         ; Particle-Mesh Ewald
+rvdw                =  1.4         ; Van der Waals icut-off
+rcoulomb            =  1.4         ; electroxtatic cut-off
+rlist               =  1.4
+fourierspacing      =  0.16
+pme-order           =  4
+ewald-rtol          =  1e-5
+
+; Temperature coupling
+Tcoupl              =  V-rescale
+tc-grps		    =  system	
+ref_t               =  300
+tau_t		    =  0.1
+
+; Pressure coupling
+Pcoupl              =  Parrinello-Rahman  
+Pcoupltype	    =  Isotropic
+tau_p               =  1.0  ; 0.5
+compressibility     =  4.5e-5
+ref_p               =  1.0
+continuation	    =  yes
+refcoord_scaling    =  com ;all
+
+; Generate velocites is on at 300 K.
+gen_vel             =  no
+
+constraints 	    =  h-bonds 
